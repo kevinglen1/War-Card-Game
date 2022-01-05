@@ -1,0 +1,31 @@
+ Card values match their number (2 - 10) unless it's a face card.
+  Jack = 11, Queen = 12, King = 13, A = 14, Joker = 15.
+
+ 
+ User clicks PLAY BUTTON and PLAYER 1 & PLAYER 2 IN PLAY cards are revealed simultaneously
+
+ Player with higher ranking card wins round
+ Player with higher ranking card collects all cards in round to their DISCARD PILE.
+
+If both players play cards of equal rank, print 'WAR' & both players play 3 more face-down (mystery) cards THEN
+both players play 1 face up card THEN the player with the higher rank of the recent card wins and collects all cards
+from round. Each tieing round is followed by another WAR round until there is a winner.
+
+If player runs out of cards in DRAW PILE then restock with DISCARD PILE randomly sorted.
+
+If a player runs out of cards (DRAW PILE & DISCARD PILE), they lose
+
+If a Player has collected all cards, they win, PRINT TO SCREEN `Player ${winner} Wins!`.
+
+ 
+
+ 
+const twoSpades = 2;
+const twoHearts = 2;
+const twoDiamonds = 2;
+const twoClubs = 2;
+ 
+
+
+
+ 
