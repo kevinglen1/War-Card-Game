@@ -3,6 +3,9 @@ const suits = ['h', 'd', 's', 'c']
 const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 
 /*----- app's state (variables) -----*/
+let deck = [];
+let playerOneHand = [];
+let playerTwoHand = [];
 /*----- cached element references -----*/
 const playerOneCardOne = document.querySelector("#player-one")
 const playerOneCardtwo = document.querySelector("#player-two")
@@ -11,11 +14,12 @@ const playerOneCardtwo = document.querySelector("#player-two")
 init();
 
 function init() {
-    board = [
-      [0, 0, 0],
-      [0, 0, 0],
-      [0, 0, 0],
-    ];
+  getDeck()
+  shuffle(deck)
+  console.log(deck)
+  dealCards(deck)
+  
+
     render();
   }
 
@@ -26,15 +30,17 @@ function render() {
 
 function getDeck()
 {
-	let deck = new Array();
+	deck = new Array();
 
 	for(let i = 0; i < suits.length; i++) {
 		for(let x = 0; x < values.length; x++) {
-			let card = {Value: values[x], Suit: suits[i]};
+			let card = {
+        Value: values[x], 
+        Suit: suits[i]
+      };
 			deck.push(card);
 		}
 	}
-
 	return deck;
 }
 
@@ -56,6 +62,28 @@ function shuffle(array) {
   return array;
 }
 
+function dealCards() {
+  for (i = 0; i < 52; i++) {
+    console.log(i, deck.length)
+    if (i % 2 == 0) {
+      playerOneHand.push(deck.pop())
+    }
+    else {
+      playerTwoHand.push(deck.pop())
+      }
+    }
+  }
+  // console.log(deck)
+  // console.log(playerOneHand)
+  // console.log(playerTwoHand)
+  //console.log(playerTwoHand)
 
-shuffle(deck);
-console.log(deck);
+
+  //shows cards and puts cards into new array
+  function playHand() {
+
+  }
+  
+  //determines winner in prints to screen
+
+  //winner gets pot array added to the end of their hand
