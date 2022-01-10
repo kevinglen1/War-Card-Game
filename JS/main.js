@@ -1,30 +1,65 @@
 /*----- constants -----*/
 const suits = ['h', 'd', 's', 'c']
-const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
+const values = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A']
+const numericValue = {
+  '02' : 2,
+  '03' : 3,
+  '04' : 4,
+  '05' : 5,
+  '06' : 6,
+  '07' : 7,
+  '08' : 8,
+  '09' : 9,
+  '10' : 10,
+  'J' : 11,
+  'Q' : 12,
+  'K' : 13,
+  'A' : 14
+}
 
 /*----- app's state (variables) -----*/
 let deck = [];
-let playerOneHand = [];
-let playerTwoHand = [];
+let playerOneHand = []
+let playerTwoHand = []
+
+let playerOneInPlay = []
+let playerTwoInPlay = []
+
+let playerOneValue = null
+let playerTwoValue = null
+
+let cardOne = 'a'
+let cardTwo = 'a'
 /*----- cached element references -----*/
 const playerOneCardOne = document.querySelector("#player-one")
-const playerOneCardtwo = document.querySelector("#player-two")
+const playerTwoCardOne = document.querySelector("#player-two")
+const playBtn = document.querySelector("#play")
+const collectCardsBtn = document.querySelector("#collect-cards")
+
 /*----- event listeners -----*/
+playBtn.addEventListener("click", playHand)
 /*----- functions -----*/
 init();
 
 function init() {
   getDeck()
   shuffle(deck)
-  console.log(deck)
   dealCards(deck)
   
 
-    render();
+    ;
   }
 
 
 function render() {
+  playerOneCardOne.classList.remove(cardOne)
+  cardOne = playerOneInPlay[0].Suit + playerOneInPlay[0].Value
+  playerOneCardOne.classList.add(cardOne)
+
+  playerTwoCardOne.classList.remove(cardTwo)
+
+  cardTwo = playerTwoInPlay[0].Suit + playerTwoInPlay[0].Value
+  playerTwoCardOne.classList.add(cardTwo)
 
 }
 
@@ -63,8 +98,7 @@ function shuffle(array) {
 }
 
 function dealCards() {
-  for (i = 0; i < 52; i++) {
-    console.log(i, deck.length)
+  for (i = 0; i < 50; i++) {
     if (i % 2 == 0) {
       playerOneHand.push(deck.pop())
     }
@@ -81,9 +115,70 @@ function dealCards() {
 
   //shows cards and puts cards into new array
   function playHand() {
+    if (playerOneValue > playerTwoValue) {
+      for (i = 0; i < playerOneInPlay.length + 1; i++) {
+        console.log(playerOneInPlay.length)
+      playerOneHand.push(playerOneInPlay.pop())
+      }
+      for (i = 0; i < playerTwoInPlay.length + 1; i++) {
+        playerOneHand.push(playerTwoInPlay.pop())
+        }
+    }
+    else if (playerTwoValue > playerOneValue) {
+      for (i = 0; i < playerOneInPlay.length + 1; i++) {
+        playerTwoHand.push(playerOneInPlay.pop())
+        }
+        for (i = 0; i < playerTwoInPlay.length + 1; i++) {
+          playerTwoHand.push(playerTwoInPlay.pop())
+          }
+
+    }
+
+
+    playerOneInPlay.unshift(playerOneHand.pop())
+    console.log(playerOneInPlay)
+    playerTwoInPlay.unshift(playerTwoHand.pop())
+    console.log(playerTwoInPlay)
+
+    playerOneValue = numericValue[playerOneInPlay[0].Value]
+    playerTwoValue = numericValue[playerTwoInPlay[0].Value]
+
+    render()
+
+    
+    if (playerOneValue > playerTwoValue) {
+      console.log('lose')
+      
+
+    }
+    else if (playerTwoValue > playerOneValue) {
+      console.log('win')
+    }
+    else if (playerOneValue === playerTwoValue) {
+      console.log('war')
+
+    }
+
 
   }
   
-  //determines winner in prints to screen
+  //determines winner or tie (WAR!) and prints to screen
+function checkWinner() {
+  
+}
+  //Tie (WAR!) function
 
   //winner gets pot array added to the end of their hand
+  // function collectCards() {
+  //   if (playerOneValue > playerTwoValue) {
+  //     console.log('lose')
+
+
+  //   }
+  //   else if (playerTwoValue > playerOneValue) {
+  //     console.log('win')
+  //   }
+  //   else if (playerOneValue === playerTwoValue) {
+  //     console.log('war')
+  //   }
+  // }
