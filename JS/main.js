@@ -109,7 +109,7 @@ function shuffle(array) {
 }
 
 function dealCards() {
-  for (i = 0; i < 50; i++) {
+  for (let i = 0; i < 4; i++) {
     if (i % 2 == 0) {
       playerOneHand.push(deck.pop());
     } else {
@@ -121,38 +121,46 @@ function dealCards() {
 //shows cards and puts cards into new array
 function playHand() {
   if (playerOneValue > playerTwoValue) {
-    for (i = 0; i < playerOneInPlay.length + 1; i++) {
-      console.log(playerOneInPlay.length);
-      playerOneHand.push(playerOneInPlay.pop());
+      playerOneHand.push(...playerOneInPlay)
+      playerOneInPlay = []
+
+      playerOneHand.push(...playerTwoInPlay)
+      playerTwoInPlay = []
     }
-    for (i = 0; i < playerTwoInPlay.length + 1; i++) {
-      playerOneHand.push(playerTwoInPlay.pop());
-    }
-  } else if (playerTwoValue > playerOneValue) {
-    for (i = 0; i < playerOneInPlay.length + 1; i++) {
-      playerTwoHand.push(playerOneInPlay.pop());
-    }
-    for (i = 0; i < playerTwoInPlay.length + 1; i++) {
-      playerTwoHand.push(playerTwoInPlay.pop());
-    }
+    else if (playerTwoValue > playerOneValue) {
+      playerTwoHand.push(...playerOneInPlay)
+      playerOneInPlay = []
+
+      playerTwoHand.push(...playerTwoInPlay)
+      playerTwoInPlay = []
   }
 
-  playerOneInPlay.unshift(playerOneHand.pop());
-  console.log(playerOneInPlay);
-  playerTwoInPlay.unshift(playerTwoHand.pop());
-  console.log(playerTwoInPlay);
+  
 
-  playerOneValue = numericValue[playerOneInPlay[0].Value];
-  playerTwoValue = numericValue[playerTwoInPlay[0].Value];
+  if (playerOneHand === []) {
+    commentator.innerText = "You Win the Game!";
+  }
+  else if (playerTwoHand === []) {
+    commentator.innerText = "You Lose the Game!";
+  }
+  else {
+    console.log({playerTwoHand: playerTwoHand , playerOneHand: playerOneHand})
+    playerOneInPlay.unshift(playerOneHand.pop());
+    playerTwoInPlay.unshift(playerTwoHand.pop());
+    playerOneValue = numericValue[playerOneInPlay[0].Value];
+    playerTwoValue = numericValue[playerTwoInPlay[0].Value];
+  }
+
+
 
   render();
 
   if (playerOneValue > playerTwoValue) {
-    console.log("lose");
-    commentator.innerText = "You Lose!";
+    console.log("lost");
+    commentator.innerText = "You Lost the Round!";
   } else if (playerTwoValue > playerOneValue) {
     console.log("win");
-    commentator.innerText = "You Win!";
+    commentator.innerText = "You Won the Round!";
   } else if (playerOneValue === playerTwoValue) {
     console.log("war");
     commentator.innerText = "War!";
