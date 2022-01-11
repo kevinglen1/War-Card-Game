@@ -108,7 +108,7 @@ function shuffle(array) {
 }
 
 function dealCards() {
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 52; i++) {
     if (i % 2 == 0) {
       playerOneHand.push(deck.pop());
     } else {
@@ -119,9 +119,9 @@ function dealCards() {
 
 //shows cards and puts cards into new array
 function playHand() {
-  if (playerOneHand === []) {
+  if (playerOneHand.length === 0) {
     commentator.innerText = "You Win the Game!";
-  } else if (playerTwoHand === []) {
+  } else if (playerTwoHand.length === 0) {
     commentator.innerText = "You Lose the Game!";
   } else {
     if (playerOneValue > playerTwoValue) {
