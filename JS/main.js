@@ -137,28 +137,26 @@ function playHand() {
       playerTwoHand.push(...playerTwoInPlay);
       playerTwoInPlay = [];
     }
+    if (playerOneValue > playerTwoValue) {
+      console.log("lost");
+      commentator.innerText = "You Lost the Round!";
+    } else if (playerTwoValue > playerOneValue) {
+      console.log("win");
+      commentator.innerText = "You Won the Round!";
+    } else if (playerOneValue === playerTwoValue) {
+      console.log("war");
+      commentator.innerText = "War!";
+    }
     console.log({
       playerTwoHand: playerTwoHand,
       playerOneHand: playerOneHand,
       playerOneInPlay: playerOneInPlay,
       playerTwoInPlay: playerTwoInPlay,
     });
-    playerOneInPlay.unshift(playerOneHand.pop());
-    playerTwoInPlay.unshift(playerTwoHand.pop());
+    playerOneInPlay.unshift(playerOneHand.shift());
+    playerTwoInPlay.unshift(playerTwoHand.shift());
     playerOneValue = numericValue[playerOneInPlay[0].Value];
     playerTwoValue = numericValue[playerTwoInPlay[0].Value];
   }
-
   render();
-
-  if (playerOneValue > playerTwoValue) {
-    console.log("lost");
-    commentator.innerText = "You Lost the Round!";
-  } else if (playerTwoValue > playerOneValue) {
-    console.log("win");
-    commentator.innerText = "You Won the Round!";
-  } else if (playerOneValue === playerTwoValue) {
-    console.log("war");
-    commentator.innerText = "War!";
-  }
 }
