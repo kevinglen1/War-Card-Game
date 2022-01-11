@@ -104,7 +104,6 @@ function shuffle(array) {
       array[currentIndex],
     ];
   }
-
   return array;
 }
 
@@ -120,38 +119,35 @@ function dealCards() {
 
 //shows cards and puts cards into new array
 function playHand() {
-  if (playerOneValue > playerTwoValue) {
-      playerOneHand.push(...playerOneInPlay)
-      playerOneInPlay = []
-
-      playerOneHand.push(...playerTwoInPlay)
-      playerTwoInPlay = []
-    }
-    else if (playerTwoValue > playerOneValue) {
-      playerTwoHand.push(...playerOneInPlay)
-      playerOneInPlay = []
-
-      playerTwoHand.push(...playerTwoInPlay)
-      playerTwoInPlay = []
-  }
-
-  
-
   if (playerOneHand === []) {
     commentator.innerText = "You Win the Game!";
-  }
-  else if (playerTwoHand === []) {
+  } else if (playerTwoHand === []) {
     commentator.innerText = "You Lose the Game!";
-  }
-  else {
-    console.log({playerTwoHand: playerTwoHand , playerOneHand: playerOneHand})
+  } else {
+    if (playerOneValue > playerTwoValue) {
+      playerOneHand.push(...playerOneInPlay);
+      playerOneInPlay = [];
+
+      playerOneHand.push(...playerTwoInPlay);
+      playerTwoInPlay = [];
+    } else if (playerTwoValue > playerOneValue) {
+      playerTwoHand.push(...playerOneInPlay);
+      playerOneInPlay = [];
+
+      playerTwoHand.push(...playerTwoInPlay);
+      playerTwoInPlay = [];
+    }
+    console.log({
+      playerTwoHand: playerTwoHand,
+      playerOneHand: playerOneHand,
+      playerOneInPlay: playerOneInPlay,
+      playerTwoInPlay: playerTwoInPlay,
+    });
     playerOneInPlay.unshift(playerOneHand.pop());
     playerTwoInPlay.unshift(playerTwoHand.pop());
     playerOneValue = numericValue[playerOneInPlay[0].Value];
     playerTwoValue = numericValue[playerTwoInPlay[0].Value];
   }
-
-
 
   render();
 
