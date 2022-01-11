@@ -13,7 +13,9 @@ CSS
 
 ## Getting Started: 
 
-In this section include the link to your deployed game and any instructions you deem important.
+Link to the game: https://kevinglen1.github.io/War-Card-Game/
+
+All you need to do to play is click "Play"!
 
 ## Next Steps: 
 
